@@ -1,0 +1,41 @@
+#!/bin/zsh
+#
+# @file       sysinfo
+# @author     Chirantan Ekbote (chirantan.ekbote <at> gmail.com)
+# @date       2013-02-19
+# @version    0.1
+# @brief      Script to spit out various sensor info
+#
+# ----------------------------------------------------------------------
+
+# ------------- system commands used by this script --------------------
+
+ECHO=/usr/bin/echo
+CAT=/usr/bin/cat
+ACPI=/usr/bin/acpi
+
+# ------------- the script itself --------------------------------------
+
+# Show battery info
+$ACPI -b
+
+# Get the tempereature of the two CPU cores
+(( temp=`$CAT /sys/devices/platform/coretemp.0/temp2_input` / 1000 ))
+$ECHO "CPU Core 1 temperature:         ${temp}C"
+(( temp=`$CAT /sys/devices/platform/coretemp.0/temp3_input` / 1000 ))
+$ECHO "CPU Core 2 temperature:         ${temp}C"
+
+# Get fanspeed
+temp=`$CAT /sys/devices/platform/applesmc.768/fan1_input`
+$ECHO "Fan Speed:                      ${temp} RPM" 
+
+# Get value of the ambient light sensor
+temp=`$CAT /sys/devices/platform/applesmc.768/light | tr -d '()' | awk -F, '{print $1}'`
+$ECHO "Ambient Light:                  ${temp}" 
+
+# Get screen and keyboard backlight brightness
+temp=`$CAT /sys/class/backlight/nvidia_backlight/brightness`
+$ECHO "Backlight Brightness:           ${temp}"
+temp=`$CAT /sys/class/leds/smc::kbd_backlight/brightness`
+$ECHO "Keyboard Backlight:             ${temp}"
+
