@@ -30,7 +30,7 @@ $CP $MIRRORLIST $BACKUP
 $REFLECTOR --latest 80 --sort score --fastest 40 --save $MIRRORLIST
 
 # Update the pacman databases
-$PACMAN -Syy
+$PACMAN -Syy 1> /dev/null
 
 # Update the command-not-found database
-$PKGFILE --update
+$PKGFILE --update 1> /dev/null
