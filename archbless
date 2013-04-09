@@ -1,5 +1,5 @@
 mkdir -p boot
 mount -t msdos /dev/disk0s4 boot
-bless --mount boot --file boot/gummiboot/gummiboot.efi --setboot
+bless --mount boot --file boot/EFI/gummiboot/gummibootx64.efi --setboot
 umount boot
 rmdir boot
