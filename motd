@@ -39,4 +39,4 @@ $ECHO -e "$($ECHO $($CURL --silent https://www.archlinux.org/feeds/news/ | \
            s/<!\[CDATA\[\|\]\]>//g
            s/\|>\s*<//g
            s/ *<[^>]\+> */ /g
-           s/[<>£§]//g')\n\n";
+           s/[<>£§]//g')\n\n" > /etc/motd;
