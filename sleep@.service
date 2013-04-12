@@ -1,0 +1,13 @@
+[Unit]
+Description=user sleep hook
+Before=sleep.target
+StopWhenUnneeded=yes
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=-/usr/bin/systemctl stop netctl-auto@wlp3s0.service
+ExecStop=-/usr/bin/systemctl start netctl-auto@wlp3s0.service
+
+[Install]
+WantedBy=sleep.target
